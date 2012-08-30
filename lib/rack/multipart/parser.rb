@@ -23,7 +23,7 @@ module Rack
             body << @buf.slice!(0, i)
             @buf.slice!(0, @boundary_size+2)
 
-            @content_length = -1  if $1 == "--"
+            @content_length = -1  if $1 == "--" || @buf.empty?
           end
 
           filename, data = get_data(filename, body, content_type, name, head)
